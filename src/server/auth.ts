@@ -1,5 +1,3 @@
-import { webcrypto } from "node:crypto";
-
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { setCookie } from "cookies-next";
 import type { DefaultOptions } from "cookies-next/src/types";
@@ -10,8 +8,6 @@ import type { NextRequest } from "next/server";
 import { env } from "@/env";
 import { prisma } from "@/server/init/db";
 import { UserSessionContext } from "@/server/services/authentication/context";
-
-globalThis.crypto = webcrypto as Crypto;
 
 const adapter = new PrismaAdapter(prisma.session, prisma.user);
 

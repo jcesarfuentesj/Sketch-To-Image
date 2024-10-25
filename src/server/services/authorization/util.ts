@@ -10,7 +10,8 @@ export function isSystemActor(actor: Actor): actor is SystemActor {
 
 export function isUserActor(actor: Actor): actor is UserActor {
   return (
+    // duck type the User type
     (`type` in actor && actor.type === `User`) ||
-    (`personalEmail` in actor && `firstName` in actor) // duck type the User type
+    (`personalEmail` in actor && `firstName` in actor)
   );
 }

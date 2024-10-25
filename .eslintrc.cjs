@@ -1,9 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line  @typescript-eslint/no-require-imports
 const { builtinModules } = require(`module`);
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// @ts-expect-error dont bother with types
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const rulesDirPlugin = require(`eslint-plugin-rulesdir`);
 rulesDirPlugin.RULES_DIR = `./eslint-rules`;
 
@@ -67,10 +66,15 @@ const baseRestrictions = [...restrictedEverywhere];
 /** @type {import("eslint").Linter.Config} */
 const config = {
   plugins: [
+    // @ts-expect-error plugins are not typed
     `@typescript-eslint`,
+    // @ts-expect-error plugins are not typed
     `simple-import-sort`,
+    // @ts-expect-error plugins are not typed
     `no-only-tests`,
+    // @ts-expect-error plugins are not typed
     `rulesdir`,
+    // @ts-expect-error plugins are not typed
     `promise`,
   ],
   extends: [

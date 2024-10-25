@@ -11,7 +11,7 @@ import { api } from "@/utils/api";
 
 const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
   useEffect(() => {
-    if (env.NEXT_PUBLIC_NODE_ENV === `production`) {
+    if (env.NEXT_PUBLIC_NODE_ENV === `production` && env.LOGROCKET_APP_ID) {
       LogRocket.init(env.LOGROCKET_APP_ID);
     }
   }, []);

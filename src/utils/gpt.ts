@@ -30,7 +30,13 @@ type CompletionModelParams =
         | `gpt-4-turbo-preview`
         | `gpt-4o`
         | `gpt-4o-mini`;
-      responseFormat?: ChatCompletionCreateParams.ResponseFormat[`type`];
+      responseFormat?: Exclude<
+        Extract<
+          ChatCompletionCreateParams[`response_format`],
+          { type: unknown }
+        >[`type`],
+        `json_schema`
+      >;
     };
 
 type CompletionParams = CompletionBaseParams & CompletionModelParams;
@@ -53,7 +59,7 @@ export const GptUtil = {
       logger.info(
         {
           model,
-          lastMessage: messages[-1],
+          lastMessage: messages[messages.length - 1],
           tools,
           toolChoice,
         },

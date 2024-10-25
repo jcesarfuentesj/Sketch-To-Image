@@ -64,7 +64,7 @@ const LoginPage: NextPage<LoginPageProps> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex justify-center  px-8 py-16 lg:py-28">
+      <div className="flex justify-center px-8 py-16 lg:py-28">
         <Card className="w-full max-w-sm">
           <CardHeader className="lg:pb-4">
             <CardTitle>Login to {env.NEXT_PUBLIC_APP_NAME}</CardTitle>

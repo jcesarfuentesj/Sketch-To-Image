@@ -8,9 +8,6 @@ await import(`./src/env.js`);
 const config = {
   reactStrictMode: true,
   pageExtensions: [`tsx`, `page.ts`],
-  experimental: {
-    swcPlugins: [[`next-superjson-plugin`, {}]],
-  },
 
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.
@@ -26,6 +23,21 @@ const config = {
     config.resolve.alias.canvas = false;
 
     return config;
+  },
+  api: {
+    bodyParser: {
+      sizeLimit: `10mb`,
+    },
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: `https`,
+        hostname: `replicate.delivery`,
+        port: ``,
+        pathname: `/pbxt/**`,
+      },
+    ],
   },
 };
 

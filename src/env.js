@@ -12,7 +12,6 @@ export const env = createEnv({
       .default(`development`),
 
     DATABASE_URL: z.string().url(),
-    PRISMA_FIELD_ENCRYPTION_KEY: z.string(),
     PRISMA_LOG_LEVEL: z.string().optional(),
 
     TEMPORAL_ADDRESS: z.string(),
@@ -28,12 +27,14 @@ export const env = createEnv({
     TEMPORAL_QUEUE: z.string(),
 
     AWS_REGION: z.string(),
-    AWS_S3_ACCESS_KEY_ID: z.string(),
-    AWS_S3_SECRET_ACCESS_KEY: z.string(),
+    AWS_S3_ACCESS_KEY_ID: z.string().optional(),
+    AWS_S3_SECRET_ACCESS_KEY: z.string().optional(),
     AWS_S3_BUCKET: z.string(),
 
-    OPENAI_API_KEY: z.string(),
-    LOGROCKET_APP_ID: z.string(),
+    OPENAI_API_KEY: z.string().optional(),
+    VOYAGE_API_KEY: z.string().optional(),
+    LOGROCKET_APP_ID: z.string().optional(),
+    REPLICATE_API_TOKEN: z.string(),
   },
 
   /**
@@ -60,7 +61,6 @@ export const env = createEnv({
 
     DATABASE_URL: process.env.DATABASE_URL,
     PRISMA_LOG_LEVEL: process.env.PRISMA_LOG_LEVEL,
-    PRISMA_FIELD_ENCRYPTION_KEY: process.env.PRISMA_FIELD_ENCRYPTION_KEY,
 
     TEMPORAL_ADDRESS: process.env.TEMPORAL_ADDRESS,
     TEMPORAL_CLIENT_KEY: process.env.TEMPORAL_CLIENT_KEY,
@@ -74,7 +74,9 @@ export const env = createEnv({
     AWS_S3_BUCKET: process.env.AWS_S3_BUCKET,
 
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    VOYAGE_API_KEY: process.env.VOYAGE_API_KEY,
     LOGROCKET_APP_ID: process.env.LOGROCKET_APP_ID,
+    REPLICATE_API_TOKEN: process.env.REPLICATE_API_TOKEN,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

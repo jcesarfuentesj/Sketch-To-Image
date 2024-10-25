@@ -8,6 +8,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 import { env } from "@/env";
 import dayjs from "@/init/dayjs";
+import { logger } from "@/init/logger";
 import { assertUnreachable } from "@/server/util/types";
 
 export type SignedFileType = {
@@ -23,13 +24,22 @@ export class FileService {
   private s3Client: S3Client;
 
   constructor() {
-    this.s3Client = new S3Client({
-      region: env.AWS_REGION,
-      credentials: {
-        accessKeyId: env.AWS_S3_ACCESS_KEY_ID,
-        secretAccessKey: env.AWS_S3_SECRET_ACCESS_KEY,
-      },
-    });
+    if (!env.AWS_S3_ACCESS_KEY_ID || !env.AWS_S3_SECRET_ACCESS_KEY) {
+      logger.warn(
+        `AWS_S3_ACCESS_KEY_ID and AWS_S3_SECRET_ACCESS_KEY are not set, using anonymous access`
+      );
+      this.s3Client = new S3Client({
+        region: env.AWS_REGION,
+      });
+    } else {
+      this.s3Client = new S3Client({
+        region: env.AWS_REGION,
+        credentials: {
+          accessKeyId: env.AWS_S3_ACCESS_KEY_ID,
+          secretAccessKey: env.AWS_S3_SECRET_ACCESS_KEY,
+        },
+      });
+    }
   }
 
   async getPresignedUrlForFile({

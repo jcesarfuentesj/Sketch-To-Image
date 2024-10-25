@@ -1,7 +1,6 @@
 import type { Prisma } from "@prisma/client";
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { PrismaClient as _PrismaClient } from "@prisma/client";
-import { fieldEncryptionExtension } from "prisma-field-encryption";
 
 import { env } from "@/env.js";
 import { logger } from "@/init/logger";
@@ -30,14 +29,16 @@ const createExtendedPrismaClient = () => {
     log: _prismaLogLevel(),
   });
 
+  return _prisma;
+
   // This is where we would add extensions
   // https://www.prisma.io/docs/concepts/components/prisma-client/client-extensions
-  return _prisma.$extends(
-    // https://github.com/47ng/prisma-field-encryption/
-    fieldEncryptionExtension({
-      encryptionKey: env.PRISMA_FIELD_ENCRYPTION_KEY,
-    })
-  );
+  // return _prisma.$extends(
+  //   // https://github.com/47ng/prisma-field-encryption/
+  //   fieldEncryptionExtension({
+  //     encryptionKey: env.PRISMA_FIELD_ENCRYPTION_KEY,
+  //   })
+  // );
 };
 
 // export type PrismaClient = ReturnType<typeof createExtendedPrismaClient>;
